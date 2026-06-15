@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "valos-agent",
+  "display_name": "ValOs",
+  "description": "AI agent by ValOs with 90+ tools, persistent memory, and multi-platform support",
+  "icon": "icon.svg",
+  "distribution": {
+    "type": "command",
+    "command": "valos-agent",
+    "args": ["acp"]
+  }
+}

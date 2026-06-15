@@ -1,0 +1,7 @@
+# Generated dashboard build artifacts are shipped with the Python package.
+valos_cli/web_dist/** linguist-generated=true
+
+# Lockfiles are useful, but should not dominate GitHub diffs.
+package-lock.json linguist-generated=true
+web/package-lock.json linguist-generated=true
+scripts/whatsapp-bridge/package-lock.json linguist-generated=true

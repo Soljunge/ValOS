@@ -1,0 +1,19 @@
+:root {
+  --background-base: #002623;
+  --foreground: rgb(0 0 0 / var(--foreground-alpha, 0));
+  --foreground-alpha: 0;
+  --midground: #ffe6cb;
+  --warm-glow: #34d399;
+  --text-primary: #f3f6ef;
+  --text-secondary: rgb(243 246 239 / 0.72);
+  --text-tertiary: rgb(243 246 239 / 0.48);
+  --text-disabled: rgb(243 246 239 / 0.32);
+  --success: #34d399;
+  --warning: #fbbf24;
+  --destructive: #fb7185;
+}
+
+body {
+  background: var(--background-base);
+  color: var(--text-primary);
+}

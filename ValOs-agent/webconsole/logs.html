@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ValOs Logs</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260606a">
+  <link rel="stylesheet" href="/style.css?v=20260601d">
+</head>
+<body class="logs-page">
+  <main class="logs-layout">
+    <header class="logs-header">
+      <div>
+        <div class="logs-kicker">ValOs Workspace</div>
+        <h1 class="logs-title">Agent Logs</h1>
+        <p class="logs-meta" id="logs-meta">Loading log files...</p>
+      </div>
+      <div class="logs-actions">
+        <input id="logs-search" class="logs-search" type="search" placeholder="Filter visible lines" aria-label="Filter log lines">
+        <label class="logs-toggle">
+          <input id="logs-wrap-toggle" type="checkbox" checked>
+          <span>Wrap</span>
+        </label>
+        <label class="logs-toggle">
+          <input id="logs-follow-toggle" type="checkbox" checked>
+          <span>Follow</span>
+        </label>
+        <button id="copy-logs-btn" class="settings-btn secondary" type="button">Copy</button>
+        <button id="refresh-logs-btn" class="settings-btn secondary" type="button">Refresh</button>
+      </div>
+    </header>
+
+    <section class="logs-console">
+      <aside class="logs-sidebar">
+        <div class="logs-sidebar-header">
+          <h2 class="logs-sidebar-title">Files</h2>
+          <span class="logs-count" id="logs-count">0</span>
+        </div>
+        <div id="logs-file-list" class="logs-file-list" aria-label="Log files"></div>
+      </aside>
+
+      <div class="logs-shell">
+        <div class="logs-toolbar">
+          <select id="logs-select" class="logs-select" aria-label="Select log file"></select>
+          <div class="logs-detail" id="logs-detail">No file selected</div>
+        </div>
+        <pre id="logs-output" class="logs-output">Loading logs...</pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="/logs.js?v=20260601d"></script>
+</body>
+</html>

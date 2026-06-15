@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ValOs Web</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260606a">
+  <link rel="stylesheet" href="/style.css?v=20260606a">
+</head>
+<body>
+  <div class="loading-screen" id="loading-screen" role="status" aria-label="Loading ValOs">
+    <div class="loading-screen-inner">
+      <pre class="loading-v" aria-hidden="true">\               /
+ \             /
+  \           /
+   \         /
+    \       /
+     \     /
+      \   /
+       \ /</pre>
+      <div class="loading-wordmark">VALOS</div>
+      <div class="loading-status"><span>INITIALIZING</span><span class="loading-dots" aria-hidden="true"></span></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-menu">
+          <button class="logo" id="logo-menu-btn" type="button" aria-label="Open ValOs menu" aria-haspopup="true" aria-expanded="false">V</button>
+          <div class="logo-dropdown" id="logo-dropdown" hidden>
+            <button type="button" data-logo-action="chat">Chat</button>
+            <a href="/" target="_blank" rel="noopener">Open WebUI</a>
+            <button type="button" data-logo-action="settings">Settings</button>
+          </div>
+        </div>
+        <div>
+          <h1>ValOs</h1>
+          <div class="sidebar-subtitle">Agent workspace</div>
+        </div>
+      </div>
+
+      <div class="sidebar-nav" id="sidebar-tabs">
+        <button class="nav-tab active" type="button" data-tab="chat" data-title="Conversation" data-meta="Start a new conversation" aria-label="Chat">💬</button>
+        <button class="nav-tab" type="button" data-tab="control" data-title="Control" data-meta="Operate and inspect ValOs" aria-label="Control dashboard">⌘</button>
+        <button class="nav-tab" type="button" data-tab="tools" data-title="Tools" data-meta="Inspect tool surfaces and workflow extensions" aria-label="Tools">🧩</button>
+        <button class="nav-tab" type="button" data-tab="wallets" data-title="Agentic Wallets" data-meta="Connect wallets for agentic payments and on-chain tools" aria-label="Agentic wallets">💳</button>
+        <button class="nav-tab" type="button" data-tab="memory" data-title="Saved Memory" data-meta="Inspect what the agent has persisted" aria-label="Memory">🧠</button>
+        <button class="nav-tab" type="button" data-tab="files" data-title="Settings" data-meta="Model and API key configuration" aria-label="Files">📁</button>
+      </div>
+
+      <div class="panel-view active" data-panel="chat">
+        <div class="sidebar-section">
+          <button class="new-chat-btn" id="new-chat-btn" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            New conversation
+          </button>
+        </div>
+
+        <div class="session-list">
+          <div class="session-empty" id="session-empty">No saved conversations yet</div>
+          <div class="session-items" id="session-items"></div>
+        </div>
+      </div>
+
+      <div class="panel-view" data-panel="tools" hidden>
+        <div class="sidebar-section">
+          <div class="panel-card panel-empty-card">
+            <div class="panel-card-title">Tools</div>
+            <p>Tool activity is not exposed in this WebUI yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-view" data-panel="control" hidden>
+        <div class="sidebar-section">
+          <div class="panel-card">
+            <div class="panel-card-title">Control dashboard</div>
+            <div class="panel-card-subtitle">Agents, runtime, usage, schedules, and diagnostics.</div>
+          </div>
+        </div>
+        <div class="control-side-nav" id="control-side-nav"></div>
+      </div>
+
+      <div class="panel-view" data-panel="wallets" hidden>
+        <div class="sidebar-section">
+          <div class="panel-card">
+            <div class="panel-card-title">Agentic wallets</div>
+            <div class="panel-card-subtitle">Wallets and rails ValOs can use for agent payments or blockchain tools.</div>
+          </div>
+        </div>
+        <div class="wallet-list" id="wallet-list"></div>
+      </div>
+
+      <div class="panel-view" data-panel="memory" hidden>
+        <div class="sidebar-section">
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <div class="panel-card-title">Saved memory</div>
+                <div class="panel-card-subtitle" id="memory-provider-label">Loading...</div>
+              </div>
+              <button class="settings-btn secondary panel-refresh-btn" id="refresh-memory-btn" type="button">Refresh</button>
+            </div>
+            <div class="memory-status" id="memory-status">Loading saved memory...</div>
+          </div>
+        </div>
+        <div class="memory-groups" id="memory-groups">
+          <section class="memory-group">
+            <div class="memory-group-header">
+              <h2>Personal Notes</h2>
+              <span class="memory-usage" id="memory-usage-notes">0 entries</span>
+            </div>
+            <div class="memory-empty" id="memory-empty-notes">No saved notes in `MEMORY.md`.</div>
+            <div class="memory-list" id="memory-list-notes"></div>
+          </section>
+
+          <section class="memory-group">
+            <div class="memory-group-header">
+              <h2>User Profile</h2>
+              <span class="memory-usage" id="memory-usage-user">0 entries</span>
+            </div>
+            <div class="memory-empty" id="memory-empty-user">No saved profile entries in `USER.md`.</div>
+            <div class="memory-list" id="memory-list-user"></div>
+          </section>
+        </div>
+      </div>
+
+      <div class="panel-view" data-panel="files" hidden>
+        <div class="sidebar-section">
+          <div class="panel-card">
+            <div class="panel-card-title">Settings</div>
+            <div class="panel-card-subtitle">Model and API key configuration</div>
+          </div>
+        </div>
+        <div class="sidebar-section settings-panel">
+          <div class="panel-card settings-card">
+            <label class="field-label" for="provider-select">Provider</label>
+            <select id="provider-select">
+              <option value="auto">Auto</option>
+            </select>
+            <div class="settings-editor" id="provider-base-url-wrap" hidden>
+              <label class="field-label" for="provider-base-url-input">Base URL</label>
+              <input id="provider-base-url-input" type="text" autocomplete="off" placeholder="https://api.example.com/v1">
+            </div>
+            <label class="field-label" for="model-select">Model</label>
+            <input id="model-select" type="text" autocomplete="off" placeholder="Enter model name">
+            <label class="field-label">API key</label>
+            <div class="settings-summary" id="api-key-summary">Loading API key...</div>
+            <div class="settings-actions">
+              <button class="settings-btn secondary" id="change-api-key-btn" type="button">Change key</button>
+              <button class="settings-btn secondary danger" id="clear-api-key-btn" type="button">Clear</button>
+            </div>
+            <div class="settings-editor" id="api-key-editor" hidden>
+              <input id="api-key-input" type="password" autocomplete="off" placeholder="Paste new API key">
+              <div class="settings-actions">
+                <button class="settings-btn secondary" id="cancel-api-key-btn" type="button">Cancel</button>
+              </div>
+            </div>
+            <button class="save-settings-btn" id="save-settings-btn" type="button">Save settings</button>
+            <label class="field-label" for="telegram-home-channel-input">Telegram home channel</label>
+            <input id="telegram-home-channel-input" type="text" autocomplete="off" placeholder="Optional chat ID">
+            <label class="field-label">Telegram BotFather token</label>
+            <div class="settings-summary" id="telegram-bot-summary">Loading Telegram bot token...</div>
+            <div class="settings-actions">
+              <button class="settings-btn secondary" id="change-telegram-bot-btn" type="button">Change bot</button>
+              <button class="settings-btn secondary danger" id="clear-telegram-bot-btn" type="button">Clear</button>
+            </div>
+            <div class="settings-editor" id="telegram-bot-editor" hidden>
+              <input id="telegram-bot-input" type="password" autocomplete="off" placeholder="Telegram bot token">
+              <div class="settings-actions">
+                <button class="settings-btn secondary" id="cancel-telegram-bot-btn" type="button">Cancel</button>
+              </div>
+            </div>
+            <div class="settings-actions">
+              <button class="settings-btn secondary" id="open-logs-btn" type="button">Logs</button>
+            </div>
+            <div class="settings-divider"></div>
+            <div class="panel-card-title">Design</div>
+            <div class="panel-card-subtitle">Customize this WebUI in your browser</div>
+            <label class="field-label" for="theme-select">Theme</label>
+            <select id="theme-select">
+              <option value="dark">Dark</option>
+              <option value="midnight">Midnight</option>
+              <option value="light">Light</option>
+            </select>
+            <label class="field-label" for="density-select">Density</label>
+            <select id="density-select">
+              <option value="comfortable">Comfortable</option>
+              <option value="compact">Compact</option>
+              <option value="spacious">Spacious</option>
+            </select>
+            <label class="field-label" for="accent-select">Accent</label>
+            <select id="accent-select">
+              <option value="neutral">Neutral</option>
+              <option value="blue">Blue</option>
+              <option value="green">Green</option>
+              <option value="rose">Rose</option>
+              <option value="amber">Amber</option>
+              <option value="cyan">Cyan</option>
+              <option value="violet">Violet</option>
+              <option value="orange">Orange</option>
+            </select>
+            <label class="field-label" for="sidebar-width-input">Sidebar width</label>
+            <input id="sidebar-width-input" type="range" min="260" max="420" step="10" value="300">
+            <div class="settings-actions">
+              <button class="settings-btn secondary" id="reset-design-btn" type="button">Reset design</button>
+            </div>
+            <div class="settings-note" id="settings-note">Loading settings...</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar chat-surface">
+        <div class="topbar-copy">
+          <div class="topbar-title" id="topbar-title">Conversation</div>
+          <div class="topbar-meta" id="topbar-meta">Start a new conversation</div>
+        </div>
+        <div class="topbar-chips">
+          <button class="chip focus-btn" id="focus-btn" type="button" aria-pressed="false">Focus</button>
+          <button class="chip thinking-btn" id="thinking-btn" type="button" aria-pressed="false">Thinking</button>
+          <div class="chip" id="backend-status">
+            <span class="dot" id="health-dot"></span>
+            <span id="health-text">Checking backend...</span>
+          </div>
+          <div class="chip profile-chip">default</div>
+          <div class="chip model" id="active-model-pill">Loading model...</div>
+          <button class="chip clear-btn" id="clear-btn" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="execution-status chat-surface" id="execution-status" hidden>
+        <span class="execution-status-dot"></span>
+        <span id="execution-status-text"></span>
+      </div>
+
+      <div class="workspace-shell chat-surface" id="workspace-shell">
+        <div class="messages-shell">
+          <div class="empty-state" id="empty-state">
+            <div class="empty-logo">💬</div>
+            <h2>What can I help with?</h2>
+            <p>Ask ValOs anything and the conversation will appear here.</p>
+          </div>
+          <div class="messages" id="messages">
+            <div class="messages-inner" id="messages-inner"></div>
+          </div>
+          <button class="new-messages-btn" id="new-messages-btn" type="button" hidden>New messages ↓</button>
+        </div>
+        <div class="output-divider" id="output-divider" hidden></div>
+        <aside class="output-sidebar" id="output-sidebar" hidden aria-label="Tool output">
+          <div class="output-sidebar-header">
+            <div>
+              <div class="output-sidebar-title" id="output-sidebar-title">Tool output</div>
+              <div class="output-sidebar-meta" id="output-sidebar-meta"></div>
+            </div>
+            <button class="output-close-btn" id="output-close-btn" type="button" aria-label="Close output">×</button>
+          </div>
+          <pre class="output-sidebar-content" id="output-sidebar-content"></pre>
+        </aside>
+      </div>
+
+      <div class="queue-bar chat-surface" id="queue-bar" hidden>
+        <span id="queue-label">1 message queued</span>
+        <button id="clear-queue-btn" type="button">Clear queue</button>
+      </div>
+
+      <form class="composer-wrap chat-surface" id="composer">
+        <div class="composer-box">
+          <div class="composer-dropzone" id="composer-dropzone" hidden>
+            <div class="composer-dropzone-copy">Drop images or documents to attach them</div>
+          </div>
+          <div class="composer-attachments" id="composer-attachments" hidden></div>
+          <textarea id="message-input" rows="1" placeholder="Message ValOs..."></textarea>
+          <div class="composer-footer">
+            <div class="composer-left">
+              <button class="attach-btn" id="attach-btn" type="button" aria-label="Attach files">+</button>
+              <span class="composer-hint" id="composer-hint">Drop, paste, or click +</span>
+              <input id="file-input" type="file" multiple hidden>
+            </div>
+            <div class="composer-right">
+              <button class="stop-btn" id="stop-btn" type="button" aria-label="Stop generation" hidden>
+                <span aria-hidden="true"></span>
+              </button>
+              <button class="send-btn" id="send-btn" type="submit" aria-label="Send message">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="19" x2="12" y2="5"></line>
+                  <polyline points="5 12 12 5 19 12"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <section class="control-workspace" id="control-workspace" hidden>
+        <header class="control-header">
+          <div>
+            <div class="control-eyebrow">VALOS CONTROL</div>
+            <h2 id="control-title">Overview</h2>
+            <p id="control-subtitle">Gateway status and system summary.</p>
+          </div>
+          <button class="settings-btn secondary" id="control-refresh-btn" type="button">Refresh</button>
+        </header>
+        <div class="control-content" id="control-content">
+          <div class="control-loading">Loading control data...</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="message-template">
+    <article class="msg-row">
+      <div class="msg-role">
+        <div class="role-icon"></div>
+        <span class="message-role"></span>
+        <span class="message-time"></span>
+      </div>
+      <div class="msg-body message-content"></div>
+      <div class="tool-cards"></div>
+    </article>
+  </template>
+
+  <script src="/app.js?v=20260606a"></script>
+</body>
+</html>
