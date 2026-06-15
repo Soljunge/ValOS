@@ -218,8 +218,28 @@ ValOs will package it as an executable Python plugin that is permanently added t
 
 ---
 
+## Deploying the Website to Vercel
+
+You can deploy the static landing page and the Docusaurus documentation as a unified site on Vercel:
+
+1. Import your repository into Vercel.
+2. Vercel will automatically detect the configuration in `vercel.json` and build the unified layout:
+   - Serves the static **landing page** at the root (`/`).
+   - Generates the skills registry and compiles the **Docusaurus docs** to be served at `/docs/`.
+3. Your deployment will build and run completely zero-config out-of-the-box!
+
+### Vercel Deployment Capabilities & Benefits
+
+- **Unified Routing**: Resolves the landing page at `/` and the Docusaurus site at `/docs/` automatically under a single domain, ensuring a cohesive user experience.
+- **Automated Skills Generation**: Every Git push triggers the skills parser (`extract-skills.py`), automatically updating the documentation index with new skills created in the repository.
+- **Preview Deployments**: Automatically generates unique preview URLs for every branch and Pull Request, allowing you to review UI changes or document updates before they go live.
+- **Global Edge Network**: Deploys all assets to Vercel's global edge CDN, guaranteeing lightning-fast load times and excellent Core Web Vitals for SEO.
+- **Zero Config**: All install, build, and output settings are defined in the repository, making Vercel deployments truly plug-and-play.
+
+---
 
 ## Contributing
+
 
 
 We welcome contributions! See the [Contributing Guide](https://valos-agent.valos-agent.com/docs/developer-guide/contributing) for development setup, code style, and PR process.

@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "installCommand": "npm --prefix website install",
+  "buildCommand": "(python3 -m pip install pyyaml --break-system-packages || python3 -m pip install pyyaml || pip install pyyaml) && python3 website/scripts/extract-skills.py && mkdir -p dist && cp -r landingpage/* dist/ && npm --prefix website run build && mv website/build dist/docs",
+  "outputDirectory": "dist"
+}
