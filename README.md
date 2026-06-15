@@ -66,4 +66,9 @@ valos-agent gateway start
 > [!WARNING]
 > **Disclaimer:** In order to perform transactions or financial operations, ValOs requires integration with an **agentic wallet**. Trading memecoins and other crypto assets involves extremely high market risk. The agent operates autonomously and can make mistakes at trading, execute erroneous transactions, or incur significant financial losses. Always use with caution and monitor transactions closely.
 
+---
+
+_Made with the help of the [Hermes Agent](https://hermes-agent.nousresearch.com/)_
+
+
 
