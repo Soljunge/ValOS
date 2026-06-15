@@ -173,7 +173,54 @@ ValOs also carries an OpenClaw-inspired channel registry. Supported ValOs adapte
 
 ---
 
+## What ValOs is Good At
+
+ValOs is designed for developers who want a persistent, autonomous assistant that gets smarter over time and is accessible from anywhere.
+
+*   **Self-Improving Memory & Skill Building**: Unlike standard chatbots, ValOs remembers context across sessions. When it encounters a complex task that it successfully solves, it can autonomously write a Python script as a new reusable skill, commit it, and refine it over time.
+*   **Omnipresent Communication Gateway**: Talk to your agent through a rich Terminal UI, or connect it to messaging services like Telegram, Discord, WhatsApp, Slack, Matrix, or email. You can run tasks from your phone while on the go, or set up webhooks and Home Assistant integrations.
+*   **Background Cron Automations**: Schedule recurring jobs in natural language. For example, have ValOs check your repositories for issues, scrape a webpage for updates, generate daily reports, or perform audits, and deliver the summaries to your chat client of choice.
+*   **Sandbox Security & Flexibility**: Run the agent directly on your host machine, sandbox it in Docker containers, or run it serverless using Daytona or Modal. When idle, serverless backends hibernate to near-zero cost, waking up instantly when a message arrives.
+*   **Parallel Execution**: Delegate complex pipelines to concurrent subagents or call tools via RPC using Python scripts.
+
+---
+
+## How to Use ValOs
+
+### 1. Interactive Development & Coding
+Launch the Terminal UI inside any codebase:
+```bash
+valos-agent
+```
+Ask it to run tests, find bugs, execute git commits, or write files. It requests permission for write operations, ensuring you stay in control.
+
+### 2. Messaging & Remotely Controlling your Agent
+Set up the Gateway process to access your agent via Telegram or Discord:
+```bash
+valos-agent gateway setup
+valos-agent gateway start
+```
+From your messaging app, you can:
+*   Ask it to summarize a PDF or transcribe a voice memo.
+*   Run bash commands or git checks.
+*   Check on long-running tasks while you are away from your computer.
+
+### 3. Creating Background Pipelines (Cron)
+Ask ValOs to schedule a recurring automation:
+*   *"Check my GitHub PRs every weekday at 9 AM and message me the summary on Slack."*
+*   *"Run a security scan on this directory every Sunday at midnight."*
+ValOs translates these into cron entries and handles the execution and delivery.
+
+### 4. Custom Skill Development
+If you have a workflow you repeat often (like deploying a specific project or format transformation), ask ValOs:
+*   *"Create a skill called `deploy-app` that runs these commands..."*
+ValOs will package it as an executable Python plugin that is permanently added to its tool list.
+
+---
+
+
 ## Contributing
+
 
 We welcome contributions! See the [Contributing Guide](https://valos-agent.valos-agent.com/docs/developer-guide/contributing) for development setup, code style, and PR process.
 
