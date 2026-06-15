@@ -1,4 +1,4 @@
-# How ValOs Works: A Visual Guide ☤
+# How ValOs Works: A Visual Guide 
 
 This document explains the inner architecture and execution flows of the ValOs agent.
 
