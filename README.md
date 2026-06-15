@@ -59,3 +59,9 @@ valos-agent gateway start
 *   [ValOs-agent/landingpage/](file:///Users/horatiubudai/ceo/ValOs/ValOS/ValOs-agent/landingpage): High-performance static landing page.
 *   [ValOs-agent/website/](file:///Users/horatiubudai/ceo/ValOs/ValOS/ValOs-agent/website): Docusaurus documentation site.
 
+---
+
+> [!WARNING]
+> **Disclaimer:** In order to perform transactions or financial operations, ValOs requires integration with an **agentic wallet**. Trading memecoins and other crypto assets involves extremely high market risk. The agent operates autonomously and can make mistakes at trading, execute erroneous transactions, or incur significant financial losses. Always use with caution and monitor transactions closely.
+
+
