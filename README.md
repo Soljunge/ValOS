@@ -4,6 +4,8 @@
 [![Memecoin Alpha](https://img.shields.io/badge/Focus-Memecoin%20Alpha-red.svg)](https://github.com/Soljunge/ValOS)
 [![DaVinci-level Precision](https://img.shields.io/badge/Quality-DaVinci--level%20Precision-purple.svg)](https://github.com/Soljunge/ValOS)
 [![Effortless Setup](https://img.shields.io/badge/Experience-Effortless%20Setup-green.svg)](https://github.com/Soljunge/ValOS)
+[![Risk: High](https://img.shields.io/badge/Risk-High-red.svg)](https://github.com/Soljunge/ValOS)
+
 
 # ValOs: Next-Generation Autonomous AI for Memecoin Mastery & Systems Automation
 
